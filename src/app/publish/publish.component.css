@@ -1,0 +1,105 @@
+header
+{
+    background-color: #f6f7fc;
+    padding: 15px 15px 80px 15px;
+   
+    
+}
+header .dropdown
+{
+    position: relative;
+    z-index: 1;
+    
+}
+
+header .dropdown::after
+{
+    content: '▼';
+    position: absolute;
+    right: 13px;
+    top: 12px;
+    padding-left:  30px;
+    z-index: 1;
+}
+header select:focus
+{
+    /* border: rgb(0, 0, 0); */
+    box-shadow: none;
+    
+}
+header select
+{
+    box-shadow: none;
+    padding: 10px 40px 10px 10px;
+    width: 100%;
+    z-index: 555;
+   
+}
+header select option
+{
+    font-size: 12px;
+}
+header .division,.grades,.classes
+{
+    width: 20%;
+}
+header label
+{
+    font-weight: 500;
+}
+/* ************************************************************ */
+.files {
+    width: 25%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.788);
+    border-radius: 3px;
+    position: relative;
+    margin: 20px 0 0;
+    /* text-align: center; */
+    /* line-height: 2.2; */
+    font-weight: bold;
+    
+  }
+  /* #384875 */
+.files::after
+{
+    content: 'Select File';
+    background-color: rgb(194, 185, 185,.5);
+    margin: 0px 30px;
+    padding: 5px 15px;
+    border-radius: 10%;
+}
+
+.files input{
+    padding: 0;
+    margin: 0;
+    background-color: rgba(214, 213, 213, 0.788);
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* width: 500%;
+    height: 50%; */
+    opacity: 0;
+    cursor: pointer;
+  }
+
+.submit button
+{
+    background-color: #394776;
+    color: white;
+    border: 1px solid #394776;
+    border-radius: 5%;
+}
+.submit button:focus
+{
+    box-shadow: none;
+    border: 1px solid #394776;
+}
+
+form input:focus
+{
+    border: 1px solid rgb(178, 174, 174);
+    box-shadow: none;
+}

@@ -1,0 +1,101 @@
+<form  [formGroup]="publishForm" >
+    <header class=" d-flex justify-content-between align-items-end">
+        <div class="division ">
+            <label for="division">Division</label><br>
+           <div class="form-group ">
+            <div class="dropdown">
+                <select formControlName="division" class="form-control  border-dark" name="division" id="division" #divs (change)="checkDvivision(divs.value);filteration(divs.value,grad.value,classes.value)">
+                    <option value="defualt"   selected>All Division</option>
+                    <option value="1">British</option>
+                    <option value="2">American</option>
+                </select>
+            </div>
+           </div>
+        </div>
+      
+        <div class="grades ">
+            <label for="grades">Grade</label><br>
+            <div class="form-group">
+                <div class="dropdown">
+                    <select formControlName="grade" class="form-control  border-dark" #grad (change)="checkGrades(grad.value);filteration(divs.value,grad.value,classes.value)" name="grades" id="grades">
+                        <option value="defualt"  selected>All Grades</option>
+                        <option [value]="grade.grade_id" *ngFor="let grade of gradess">{{grade.gradeName}}</option>
+                    </select>
+                   </div>
+            </div>
+        </div>
+      
+        <div class="classes">
+            <label for="classes">Class</label><br>
+            <div class="form-group">
+                <div class="dropdown">
+                    <select formControlName="class" class="form-control  border-dark" name="classes" id="classes" #classes (change)="filteration(divs.value,grad.value,classes.value)">
+                        <option value="defualt"  selected>All Classes</option>
+                        <option [value]="class.class_id" *ngFor="let class of classess">{{class.className}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+      
+       
+        <div class="btn-action ">
+            <button class="btn btn-primary px-5" (click)="reset()">Clear</button>
+        </div>
+      </header>
+</form>
+<div class="text-lg-end my-5 publish">
+    <button class="btn form-control  py-2 px-1" style="width: 20%;" routerLink="/publish">Publish News Feed</button>
+</div>
+
+<div class="content-table ">
+    <div class="d-flex justify-content-between align-items-center px-2">
+       <div class="btns">
+        <button>Column visabilty</button>
+        <button (click)='createPdf()'>PDF</button>
+        <button>Copy</button>
+        <button>Csv</button>
+        <button>Excel</button>
+        <button>Print</button>
+       </div>
+
+       <div class="entries">
+        <div>
+            <div class="entrie">
+                <label for="entrie" class="form-label">show</label>
+                <select class="mx-1 " name="entrie" id="entrie" #entries [(ngModel)]="entrie" >
+                  <option selected value="5">5 </option>
+                  <option value="10">10</option>
+                  
+                </select>
+                <span>entries</span>
+              </div>
+        </div>
+       </div>
+    </div>
+
+
+    <table  class="table table-active table-striped " >
+        <thead>
+          <tr *ngFor="let row of th; let in = index">
+            <th scope="row" *ngFor="let c of row; let in = index">{{c}}</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let feed of allNewFeed |filter:selectedDivision:selectedgrade:selectedclasses| paginate: { itemsPerPage: entrie, currentPage: cp };let i = index">
+            <td >{{feed?.division.divisionName}}</td>
+            <td>{{feed?.grade.gradeName}}</td>
+            <td>{{feed?.class.className}}</td>
+            <td>{{feed?.title}}</td>
+            <td >{{feed.userInfo.name}}</td>
+            <td>{{feed.publishDate|date:'shortDate'}}</td>
+          </tr>
+      
+        
+        </tbody>
+      </table>
+      <div class=" d-flex justify-content-between align-items-center mt-3">
+        <p style="font-size: 14px;" class=" text-dark">show {{entrie}} out of {{allNewsFeed.length}} entries</p>
+        <div><pagination-controls (pageChange)="cp= $event"></pagination-controls></div>
+      </div>
+</div>
